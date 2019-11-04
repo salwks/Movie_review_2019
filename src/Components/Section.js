@@ -31,5 +31,5 @@ Section.propTypes = {
     PropTypes.node
   ])
 };
-
+console.log(Section);
 export default Section;
