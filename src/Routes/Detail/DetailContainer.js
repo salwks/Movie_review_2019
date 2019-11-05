@@ -28,20 +28,18 @@ export default class extends React.Component {
     if (isNaN(parsedId)) {
       return push("/");
     }
-    let result;
-    if (isMovie) {
-      try {
-        if (isMovie) {
-          ({ data: result } = await moviesApi.movieDetail(parsedId));
-        } else {
-          ({ data: result } = await tvApi.showDetail(parsedId));
-        }
-        console.log(result);
-      } catch {
-        this.setState({ error: "Can't find anything" });
-      } finally {
-        this.setState({ loading: false, result });
+    let result = null;
+    try {
+      if (isMovie) {
+        ({ data: result } = await moviesApi.movieDetail(parsedId));
+      } else {
+        ({ data: result } = await tvApi.showDetail(parsedId));
       }
+      console.log(result);
+    } catch {
+      this.setState({ error: "Can't find anything" });
+    } finally {
+      this.setState({ loading: false, result });
     }
   }
 
