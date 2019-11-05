@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
 
 const Container = styled.div`
@@ -57,7 +58,7 @@ const ItemContainer = styled.div`
 const Item = styled.span``;
 
 const Divider = styled.span`
-  margin: 0 10px;
+  margin: 0 8px;
 `;
 
 const Overview = styled.p`
@@ -69,9 +70,20 @@ const Overview = styled.p`
 
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
-    <Loader />
+    <>
+      <Helmet>
+        <title>Loading | Nomflix</title>
+      </Helmet>
+      <Loader />
+    </>
   ) : (
     <Container>
+      <Helmet>
+        <title>
+          {result.original_title ? result.original_title : result.original_name}{" "}
+          | Nomflix
+        </title>
+      </Helmet>
       <Backdrop
         bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
       />
